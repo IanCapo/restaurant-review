@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { get } from 'http';
+// import { get } from 'http';
+
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -9,8 +10,8 @@ class SimpleMap extends Component {
     super(props);
     this.state = {
       center: {
-        lat: 59.95,
-        lng: 30.33
+        lat: -41.269552,
+        lng: 173.286898
       },
       zoom: 11
     };
@@ -19,8 +20,8 @@ class SimpleMap extends Component {
   locationFinder = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
-        const lat = JSON.stringify(position.coords.latitude);
-        const lng = JSON.stringify(position.coords.lng);
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
 
         this.setState({ center: { lat: lat, lng: lng }, zoom: 11 });
 
@@ -41,9 +42,11 @@ class SimpleMap extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAP_eFnQcF-kB5HRLEr77jSOwG3I6bOWzQ' }}
-          defaultCenter={this.state.center}
+          bootstrapURLKeys={{ key: 'AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y' }}
+          center={this.state.center}
           defaultZoom={this.state.zoom}
+          onChildMouseEnter={this.onChildMouseEnter}
+          onChildMouseLeave={this.onChildMouseLeave}
         >
           <AnyReactComponent
             lat={59.955413}
