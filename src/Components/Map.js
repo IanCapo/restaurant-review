@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-// import { get } from 'http';
-
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import CurrentLocationPin from './CurrentLocationPin'
 
 class SimpleMap extends Component {
   constructor(props) {
@@ -22,9 +19,7 @@ class SimpleMap extends Component {
       position => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-
         this.setState({ center: { lat: lat, lng: lng }, zoom: 11 });
-
       },
       error => alert(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -48,10 +43,10 @@ class SimpleMap extends Component {
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
+          <CurrentLocationPin
+            lat={this.state.center.lat}
+            lng={this.state.center.lng}
+            text="Your location"
           />
         </GoogleMapReact>
       </div>

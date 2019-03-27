@@ -4,27 +4,20 @@ import ListItem from './ListItem'
 
 export default class List extends Component {
 
+  createList = () => {
+    const restaurants = this.props.restaurants
+    return restaurants.map((restaurant) => (
+      <ListItem name={restaurant.restaurantName} lat={restaurant.lat} lng={restaurant.long} />
+    ))
+  }
+
   render() {
-    this.createList = () => {
-      const restaurants = this.props.restaurants
-      console.log(restaurants)
-      if (restaurants) {
-        restaurants.map((restaurant) => {
-          let restaurantName = restaurant.restaurantName
-
-          return <ListItem name={restaurantName} />
-        })
-      } else {
-        console.log('not working')
-      }
-    }
-
     return (
       <div>
         <ul className="List">
           {this.createList()}
         </ul>
-      </div>
+      </div >
     )
   }
 }   
