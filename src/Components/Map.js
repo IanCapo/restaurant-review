@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import CurrentLocationPin from './CurrentLocationPin'
+import RestaurantLocationPin from './RestaurantLocationPin'
 
 class SimpleMap extends Component {
   constructor(props) {
@@ -32,6 +33,13 @@ class SimpleMap extends Component {
     }
   }
 
+  renderPins = () => {
+    return this.props.restaurants.map((restaurant) => (
+      console.log(restaurant.lat, restaurant.long, restaurant.restaurantName),
+      <RestaurantLocationPin lat={restaurant.lat} lng={restaurant.long} text={restaurant.restaurantName} />
+    ))
+  }
+
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -49,6 +57,7 @@ class SimpleMap extends Component {
             text="Your location"
           />
         </GoogleMapReact>
+        {this.renderPins()}
       </div>
     );
   }

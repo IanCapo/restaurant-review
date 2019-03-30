@@ -9,7 +9,6 @@ class App extends Component {
     super(props);
     this.state = this.getInitialstate()
   }
-
   getInitialstate() {
     return restaurants
   }
@@ -18,7 +17,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <SimpleMap />
+        <SimpleMap restaurants={this.state.restaurants} />
         <List restaurants={this.state.restaurants} />
       </div>
     );
