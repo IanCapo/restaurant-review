@@ -27,13 +27,14 @@ class SimpleMap extends Component {
     );
   }
 
+  // componentDid Mount for fetching data
   componentDidMount() {
     if (navigator.geolocation) {
       this.locationFinder()
     }
   }
 
-  renderPins = () => {
+  renderRestaurantPins = () => {
     return this.props.restaurants.map((restaurant) => (
       console.log(restaurant.lat, restaurant.long, restaurant.restaurantName),
       <RestaurantLocationPin lat={restaurant.lat} lng={restaurant.long} text={restaurant.restaurantName} />
@@ -43,7 +44,7 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '100vh', width: '80%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y' }}
           center={this.state.center}
@@ -56,8 +57,8 @@ class SimpleMap extends Component {
             lng={this.state.center.lng}
             text="Your location"
           />
+          {this.renderRestaurantPins()}
         </GoogleMapReact>
-        {this.renderPins()}
       </div>
     );
   }

@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = this.getInitialstate()
   }
+  // change restaurants.js to json and than fetch data inside componentDidMount
   getInitialstate() {
     return restaurants
   }
