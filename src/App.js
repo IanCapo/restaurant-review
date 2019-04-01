@@ -3,7 +3,6 @@ import axios from 'axios'
 import './App.css';
 import SimpleMap from './Components/Map'
 import List from './Components/List'
-// import restaurants from './restaurants'
 
 class App extends Component {
   constructor(props) {
@@ -23,10 +22,6 @@ class App extends Component {
     .catch(function (error) {
       console.log(error);
     });
-  }
-  // getInitialstate() {
-  //   return restaurants
-  // }
 
   render() {
     console.log('this.state.restaurants', this.state.restaurants);
