@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import SimpleMap from './Components/Map'
-import List from './Components/List'
+import SimpleMap from '../src/components/Map/index'
+import List from '../src/components/Restaurants/index'
 import restaurants from './restaurants'
 
 class App extends Component {

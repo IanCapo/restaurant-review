@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import CurrentLocationPin from './CurrentLocationPin'
+import CurrentLocationPin from '../CurrentLocationPin'
 import RestaurantLocationPin from './RestaurantLocationPin'
 
 class SimpleMap extends Component {

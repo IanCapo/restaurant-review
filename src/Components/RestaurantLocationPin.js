@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 
 
-const CurLocationPin = styled('div')`
+const RestLocationPin = styled('div')`
     width: 65px;
     height: 15px;
     padding: 5px 10px;
@@ -12,12 +12,12 @@ const CurLocationPin = styled('div')`
     transform: translateX(10%);
 `
 
-export default class CurrentLocationPin extends Component {
+export default class RestaurantLocationPin extends Component {
   render() {
     return (
-      <CurLocationPin>
+      <RestLocationPin>
         {this.props.text}
-      </CurLocationPin>
+      </RestLocationPin>
     )
   }
 }
