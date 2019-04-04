@@ -12,6 +12,7 @@ export default class List extends Component {
 
   createList = () => {
     const restaurants = this.props.restaurants
+    console.log(restaurants)
     return restaurants.map((restaurant) => (
       <ListItem
         name={restaurant.restaurantName}

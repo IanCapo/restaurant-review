@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import SimpleMap from '../src/components/Map/index.js'
-import List from '../src/components/Restaurants/index.js'
+import axios from 'axios'
+import SimpleMap from '../src/components/Map/Map'
+import List from './components/Restaurants/List'
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    console.log('conponent did mount');
+    console.log('component did mount');
     axios.get('./data.json')
       .then((response) => {
         console.log('response.data', response.data);
