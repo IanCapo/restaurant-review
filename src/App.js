@@ -13,10 +13,10 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    console.log('component did mount');
+    // console.log('component did mount');
     axios.get('./data.json')
       .then((response) => {
-        console.log('response.data', response.data);
+        //console.log('response.data', response.data);
         this.setState({ restaurants: response.data })
       })
       .catch(function (error) {
@@ -25,7 +25,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('this.state.restaurants', this.state.restaurants);
     return (
       <div className="App">
         <SimpleMap restaurants={this.state.restaurants} />

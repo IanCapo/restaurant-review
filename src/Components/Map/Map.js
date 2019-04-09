@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import CurrentLocationPin from '../CurrentLocationPin'
-import RestaurantLocationPin from '../RestaurantLocationPin'
+import LocationPin from '../LocationPin'
+
 
 class SimpleMap extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class SimpleMap extends Component {
 
   renderRestaurantPins = () => {
     return this.props.restaurants.map((restaurant) => (
-      <RestaurantLocationPin lat={restaurant.lat} lng={restaurant.long} text={restaurant.restaurantName} />
+      <LocationPin lat={restaurant.lat} lng={restaurant.long} text={restaurant.restaurantName} color="green" />
     ))
   }
 
@@ -51,10 +51,11 @@ class SimpleMap extends Component {
           onChildMouseEnter={this.onChildMouseEnter}
           onChildMouseLeave={this.onChildMouseLeave}
         >
-          <CurrentLocationPin
+          <LocationPin
             lat={this.state.center.lat}
             lng={this.state.center.lng}
             text="Your location"
+            color="red"
           />
           {this.renderRestaurantPins()}
         </GoogleMapReact>
