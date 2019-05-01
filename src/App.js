@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
 import SimpleMap from '../src/components/Map/Map'
-import List from './components/Restaurants/List'
+import Restaurants from './components/Restaurants/Restaurants'
 
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <SimpleMap restaurants={this.state.restaurants} />
-        <List restaurant={this.state.restaurants} />
+        <Restaurants restaurant={this.state.restaurants} />
       </div>
     );
 

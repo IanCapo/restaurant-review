@@ -6,7 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import RestaurantDetails from './RestaurantDetails'
+import RestaurantDetails from '../RestaurantDetails'
 
 
 const styles = theme => ({
@@ -24,7 +24,7 @@ const styles = theme => ({
   },
 });
 
-class Restaurant extends React.Component {
+class RestaurantItem extends React.Component {
   state = {
     expanded: null,
   };
@@ -60,8 +60,8 @@ class Restaurant extends React.Component {
   }
 }
 
-Restaurant.propTypes = {
+RestaurantItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Restaurant);
+export default withStyles(styles)(RestaurantItem);
