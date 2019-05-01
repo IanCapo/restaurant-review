@@ -4,6 +4,7 @@ import axios from 'axios'
 import SimpleMap from '../src/components/Map/Map'
 import List from './components/Restaurants/List'
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <SimpleMap restaurants={this.state.restaurants} />
-        <List restaurants={this.state.restaurants} />
+        <List restaurant={this.state.restaurants} />
       </div>
     );
 

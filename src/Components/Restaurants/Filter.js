@@ -4,7 +4,7 @@ export default class Filter extends Component {
   render() {
     return (
       <div>
-
+        hello from filter
       </div>
     )
   }

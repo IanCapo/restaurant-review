@@ -1,29 +1,34 @@
 import React, { Component } from 'react'
-import Filter from './Filter'
-import Restaurant from './Restaurant'
-import AddButton from '../AddButton'
+import ListItem from './ListItem'
+
 
 export default class List extends Component {
+
   getAverageRating = (ratings) => {
     let totalRatings = ratings.map(rating => { return rating.stars })
     let averageRating = (totalRatings.reduce(function (a, b) { return a + b; }, 0)) / ratings.length;
     return (averageRating)
   }
-  render() {
-    let restaurants = this.props.restaurant.map((restaurant) => (
-      <Restaurant
+
+  createList = () => {
+    const restaurants = this.props.restaurants
+    return restaurants.map((restaurant) => (
+      <ListItem
         name={restaurant.restaurantName}
         lat={restaurant.lat}
         lng={restaurant.long}
         averageRating={this.getAverageRating(restaurant.ratings)} />
     ))
+  }
 
+  render() {
     return (
       <div>
-        <Filter />
-        {restaurants}
-        <AddButton />
+        <h2 style={{ padding: '20px' }}>Restaurants in this area</h2>
+        <ul className="List">
+          {this.createList()}
+        </ul>
       </div>
     )
   }
-}
+}   
