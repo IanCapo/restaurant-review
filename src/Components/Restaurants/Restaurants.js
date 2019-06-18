@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Filter from '../Filter'
 import RestaurantItem from '../RestaurantItem'
 import AddButton from '../AddButton'
+import AppProvider from '../../AppProvider';
 
 export default class Restaurants extends Component {
   getAverageRating = (ratings) => {
@@ -10,20 +11,24 @@ export default class Restaurants extends Component {
     return (averageRating)
   }
   render() {
-    let restaurants = this.props.restaurant.map((restaurant) => (
+    createListItem = (array) => array.map((restaurant) => (
       <RestaurantItem
-        name={restaurant.restaurantName}
-        lat={restaurant.lat}
-        lng={restaurant.long}
+        name={restaurant.name}
+        lat={restaurant.geometry.location.lat}
+        lng={restaurant.geometry.location.lng}
         averageRating={this.getAverageRating(restaurant.ratings)} />
     ))
 
     return (
-      <div>
-        <Filter />
-        {restaurants}
-        <AddButton />
-      </div>
+      <AppProvider>
+        <div>
+          <Filter />
+          <AppContext.Consumer>
+            {(context) => this.createListItem(context.restaurants)}
+          </AppContext.Consumer>
+          <AddButton />
+        </div>
+      </AppProvider>
     )
   }
 }

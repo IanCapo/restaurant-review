@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import LocationPin from '../LocationPin'
+import axios from 'axios'
 
 
 class SimpleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      restaurants: [],
       center: {
         lat: -41.269552,
         lng: 173.286898
       },
       zoom: 11
     };
+  }
+
+  componentDidMount = () => {
+    // console.log('component did mount');
+    axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.center.lat},${this.state.center.lng}&radius=1500&type=restaurant&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
+      .then((response) => {
+        console.log(response.data.results)
+        //console.log('response.data', response.data);
+        this.setState({ restaurants: response.data.results })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   locationFinder = () => {
@@ -35,8 +50,8 @@ class SimpleMap extends Component {
   }
 
   renderRestaurantPins = () => {
-    return this.props.restaurants.map((restaurant) => (
-      <LocationPin lat={restaurant.lat} lng={restaurant.long} text={restaurant.restaurantName} color="green" />
+    return this.state.restaurants.map((restaurant) => (
+      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" />
     ))
   }
 

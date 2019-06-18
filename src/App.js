@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios'
+import AppProvider from './AppProvider'
+
 import SimpleMap from '../src/components/Map/Map'
 import Restaurants from './components/Restaurants/Restaurants'
 
@@ -11,18 +12,6 @@ class App extends Component {
     this.state = {
       restaurants: []
     }
-  }
-
-  componentDidMount = () => {
-    // console.log('component did mount');
-    axios.get('./data.json')
-      .then((response) => {
-        //console.log('response.data', response.data);
-        this.setState({ restaurants: response.data })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   render() {
