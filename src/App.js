@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import AppProvider from './AppProvider'
+
 
 import SimpleMap from '../src/components/Map/Map'
 import Restaurants from './components/Restaurants/Restaurants'
+import AppProvider from './AppProvider';
 
 
 class App extends Component {
@@ -16,12 +17,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <SimpleMap restaurants={this.state.restaurants} />
-        <Restaurants restaurant={this.state.restaurants} />
-      </div>
+      <AppProvider>
+        <div className="App">
+          <SimpleMap />
+          <Restaurants />
+        </div>
+      </AppProvider>
     );
-
   }
 }
 
