@@ -4,6 +4,9 @@ import LocationPin from '../LocationPin'
 import AppProvider from '../../AppProvider'
 
 // this.renderRestaurantPins(context.restaurants)
+
+//THIS IS ALSO A COMMENT
+console.log('hello world');
 class SimpleMap extends Component {
 
 
