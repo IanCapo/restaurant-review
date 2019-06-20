@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
-
 import SimpleMap from '../src/components/Map/Map'
 import Restaurants from './components/Restaurants/Restaurants'
 import AppProvider from './AppProvider';

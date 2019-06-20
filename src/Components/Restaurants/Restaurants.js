@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Filter from '../Filter'
 import RestaurantItem from '../RestaurantItem'
 import AddButton from '../AddButton'
-import AppProvider from '../../AppProvider';
 import { Consumer } from '../../AppProvider'
 
 export default class Restaurants extends Component {

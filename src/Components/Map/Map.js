@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import LocationPin from '../LocationPin'
-import AppProvider from '../../AppProvider';
 import { Consumer } from '../../AppProvider'
-
-
 
 
 class SimpleMap extends Component {
@@ -18,7 +15,6 @@ class SimpleMap extends Component {
       zoom: 11
     };
   }
-
 
   locationFinder = () => {
     navigator.geolocation.getCurrentPosition(
@@ -40,6 +36,7 @@ class SimpleMap extends Component {
   }
 
   renderRestaurantPins = (restaurants) => {
+    console.log(restaurants)
     return restaurants.map((restaurant) => (
       <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" />
     ))
