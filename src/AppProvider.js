@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 const AppContext = React.createContext()
 
+
+//THIS IS A COMMENT
+
 export default class AppProvider extends Component {
   state = {
     restaurants: [],
@@ -11,6 +14,9 @@ export default class AppProvider extends Component {
     }
   }
   componentDidMount = () => {
+    if (navigator.geolocation) {
+      this.locationFinder()
+    }
     axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.center.lat},${this.state.center.lng}&radius=1500&type=restaurant&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
       .then((response) => {
         this.setState({ restaurants: response.data.results })
@@ -18,6 +24,18 @@ export default class AppProvider extends Component {
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  locationFinder = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.setState({ center: { lat: lat, lng: lng }, zoom: 11 });
+      },
+      error => alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
   }
 
   render() {
@@ -28,6 +46,3 @@ export default class AppProvider extends Component {
 }
 
 export const Consumer = AppContext.Consumer
-
-
-
