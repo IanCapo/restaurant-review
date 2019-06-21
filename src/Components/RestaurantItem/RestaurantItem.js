@@ -27,6 +27,7 @@ const styles = theme => ({
 class RestaurantItem extends React.Component {
   state = {
     expanded: null,
+    data: this.props.data
   };
 
   handleChange = panel => (event, expanded) => {
@@ -50,7 +51,7 @@ class RestaurantItem extends React.Component {
           <ExpansionPanelDetails>
 
             <Typography>
-              <RestaurantDetails />
+              <RestaurantDetails data={this.state.data} />
             </Typography>
 
           </ExpansionPanelDetails>
