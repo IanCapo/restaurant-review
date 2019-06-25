@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
-import SimpleMap from './Components/Map'
-import List from './Components/List'
-import restaurants from './restaurants'
+import SimpleMap from '../src/components/Map/Map'
+import Restaurants from './components/Restaurants/Restaurants'
+import AppProvider from './AppProvider';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = this.getInitialstate()
-  }
-  // change restaurants.js to json and than fetch data inside componentDidMount
-  getInitialstate() {
-    return restaurants
+    this.state = {
+      restaurants: []
+    }
   }
 
   render() {
-
     return (
-      <div className="App">
-        <SimpleMap restaurants={this.state.restaurants} />
-        <List restaurants={this.state.restaurants} />
-      </div>
+      <AppProvider>
+        <div className="App">
+          <SimpleMap />
+          <Restaurants />
+        </div>
+      </AppProvider>
     );
-
   }
 }
 
