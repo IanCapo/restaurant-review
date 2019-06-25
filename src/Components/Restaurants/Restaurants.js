@@ -21,12 +21,10 @@ export default class Restaurants extends Component {
                   lng={restaurant.geometry.location.lng}
                   averageRating={restaurant.rating} />
               )
-
             })}
         </Consumer>
         <AddButton />
       </div>
-
     )
   }
 }
