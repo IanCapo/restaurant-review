@@ -1,9 +1,83 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import ReviewCard from '../../Components/ReviewCard'
+import { promised } from 'q';
 
 export default class RestaurantDetails extends Component {
+  state = {
+    photo: '',
+    imageURL: '',
+    reviews: [],
+    name: '',
+    text: '',
+    value: ''
+  }
+
+  handleChange = (event) => {
+    let target = event.target
+    let name = target.name
+    let value = target.value
+    this.setState({
+      [name]: value
+    });
+  }
+
+  fetchImage = (geometry) => {
+    let lat = geometry.location.lat
+    let lng = geometry.location.lng
+    let url = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=900x600&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    return axios.get(url)
+  }
+
+  replaceResponseURL = (geometry) => {
+    let lat = geometry.location.lat
+    let lng = geometry.location.lng
+    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=300x300&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    return newURL
+  }
+
+  fetchPlacesDetails = () => {
+    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJp8z2ME2QsUcRbvdfiA4a_ak&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    return axios.get(url)
+  }
+
+  componentDidMount = () => {
+    axios.all([this.fetchImage(this.props.data.geometry), this.fetchPlacesDetails()])
+      .then(axios.spread((image, reviews) => {
+        if (image.data.status === "OK") {
+          this.setState({ imageURL: this.replaceResponseURL(this.props.data.geometry) })
+        } else {
+          this.setState({ imageURL: 'no street view' })
+        }
+        if (reviews.data.status === "OK") {
+          this.setState({ reviews: reviews.data.result.reviews })
+        } else {
+          console.log('no reviews')
+        }
+
+      }))
+  }
+
+  renderReviews = (reviews) => {
+    return reviews.map((review) => (
+      <ReviewCard name={review.author_name} rating={review.rating} text={review.text} />
+    ))
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let author_name = this.state.name
+    let text = this.state.text
+    let rating = this.state.stars
+    let newReview = { 'author_name': author_name, 'text': text, 'rating': rating }
+    this.state.reviews.push(newReview)
+    console.log(this.state.reviews)
+  }
+
 
   render() {
-    let { vicinity, opening_hours, photos } = this.props.data
+    let { vicinity, opening_hours } = this.props.data
 
     function checkIfOpen() {
       let open
@@ -21,13 +95,31 @@ export default class RestaurantDetails extends Component {
 
     return (
       <div>
-        <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photos[0].photo_reference}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y"`} />
+        <img src={this.state.imageURL} />
         <p>{checkIfOpen()}</p>
         <p>{vicinity}</p>
+        <h3>Reviews:</h3>
+        {this.renderReviews(this.state.reviews)}
+        <form id="reviewForm" onSubmit={event => this.handleSubmit(event)}>
+          <input type='text' name="name" value={this.state.author_name} onChange={this.handleChange}></input>
+          <input type='text' name="text" value={this.state.text} onChange={this.handleChange}></input>
+          <select name="stars" value="" onChange={this.handleChange}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button>Add review</button>
+        </form>
       </div>
     )
   }
 }
+
+
+
+
 
 
 

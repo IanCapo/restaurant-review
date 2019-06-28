@@ -4,7 +4,6 @@ import LocationPin from '../LocationPin'
 import { Consumer } from '../../AppProvider'
 
 
-// this.renderRestaurantPins(context.restaurants)
 class SimpleMap extends Component {
   constructor() {
     super()
@@ -22,6 +21,7 @@ class SimpleMap extends Component {
       <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" />
     ))
   }
+
 
   render() {
     return (

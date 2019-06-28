@@ -39,14 +39,13 @@ class RestaurantItem extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log(this.props)
 
     return (
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{this.props.name}</Typography>
-            <Typography className={classes.secondaryHeading}>{this.props.averageRating}</Typography>
+            <Typography className={classes.secondaryHeading}>{Math.round(this.props.averageRating)}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
 
