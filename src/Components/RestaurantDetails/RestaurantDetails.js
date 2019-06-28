@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ReviewCard from '../../Components/ReviewCard'
-import { promised } from 'q';
 
 export default class RestaurantDetails extends Component {
   state = {
@@ -13,20 +12,11 @@ export default class RestaurantDetails extends Component {
     value: ''
   }
 
-  handleChange = (event) => {
-    let target = event.target
-    let name = target.name
-    let value = target.value
-    this.setState({
-      [name]: value
-    });
-  }
-
+  /* fetch image data and reviews */
   fetchImage = (geometry) => {
     let lat = geometry.location.lat
     let lng = geometry.location.lng
     let url = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
-    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=900x600&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
     return axios.get(url)
   }
 
@@ -55,14 +45,24 @@ export default class RestaurantDetails extends Component {
         } else {
           console.log('no reviews')
         }
-
       }))
   }
 
+  /* render reviews */
   renderReviews = (reviews) => {
     return reviews.map((review) => (
       <ReviewCard name={review.author_name} rating={review.rating} text={review.text} />
     ))
+  }
+
+  /* handling the submit of a new review  */
+  handleChange = (event) => {
+    let target = event.target
+    let name = target.name
+    let value = target.value
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit = (event) => {
