@@ -7,7 +7,7 @@ export default class RestaurantDetails extends Component {
     photo: '',
     imageURL: '',
     reviews: [],
-    name: '',
+    author_name: '',
     text: '',
     value: ''
   }
@@ -28,7 +28,7 @@ export default class RestaurantDetails extends Component {
   }
 
   fetchPlacesDetails = () => {
-    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJp8z2ME2QsUcRbvdfiA4a_ak&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${this.props.data.place_id}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
     return axios.get(url)
   }
 
@@ -67,12 +67,13 @@ export default class RestaurantDetails extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let author_name = this.state.name
+    let author_name = this.state.author_name
     let text = this.state.text
-    let rating = this.state.stars
+    let rating = this.state.value
     let newReview = { 'author_name': author_name, 'text': text, 'rating': rating }
-    this.state.reviews.push(newReview)
-    console.log(this.state.reviews)
+    this.setState({
+      reviews: [...this.state.reviews, newReview]
+    });
   }
 
 
@@ -99,11 +100,11 @@ export default class RestaurantDetails extends Component {
         <p>{checkIfOpen()}</p>
         <p>{vicinity}</p>
         <h3>Reviews:</h3>
-        {this.renderReviews(this.state.reviews)}
+        {this.state.reviews ? this.renderReviews(this.state.reviews) : null}
         <form id="reviewForm" onSubmit={event => this.handleSubmit(event)}>
-          <input type='text' name="name" value={this.state.author_name} onChange={this.handleChange}></input>
+          <input type='text' name="author_name" value={this.state.author_name} onChange={this.handleChange}></input>
           <input type='text' name="text" value={this.state.text} onChange={this.handleChange}></input>
-          <select name="stars" value="" onChange={this.handleChange}>
+          <select name="value" value={this.state.value} onChange={this.handleChange}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
