@@ -11,7 +11,7 @@ import RestaurantDetails from '../RestaurantDetails'
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '30vw',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
