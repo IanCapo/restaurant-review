@@ -9,9 +9,12 @@ export default class AppProvider extends Component {
     center: {
       lat: -41.2706,
       lng: 173.2840
+    },
+    addNewRestaurant: (dataFromChild) => {
+      console.log('provider, dataFromChild', dataFromChild)
+      this.setState({ restaurants: { ...this.state.restaurants, dataFromChild } })
     }
   }
-
 
   getRestaurants = (url) => {
     axios.get(url)
@@ -42,6 +45,8 @@ export default class AppProvider extends Component {
         console.error(err.message);
       });
   }
+
+
 
 
   render() {

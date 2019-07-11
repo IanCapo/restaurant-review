@@ -8,13 +8,13 @@ export default class NewRestaurantForm extends Component {
     this.state = {
       restaurant_name: '',
       restaurant: {
-        name: '',
         geometry: {
           location: {
             lat: '',
             lng: ''
           }
         },
+        name: '',
         vicinity: '',
       }
     }
@@ -46,17 +46,20 @@ export default class NewRestaurantForm extends Component {
     this.setState({
       restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } } }
     });
-    this.props.action(this.state.restaurant)
+
   }
 
   render() {
+    console.log('props', this.props)
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
           <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
-          <button>Add restaurant</button>
+          <button type="submit">Add restaurant</button>
         </form>
+        {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}
+        {this.state.restaurant.name ? this.props.getData(this.state.restaurant) : null}
       </div>
     )
   }

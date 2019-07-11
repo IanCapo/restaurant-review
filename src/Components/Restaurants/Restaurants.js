@@ -4,6 +4,7 @@ import RestaurantItem from '../RestaurantItem'
 import AddButton from '../AddButton'
 import { Consumer } from '../../AppProvider'
 
+
 export default class Restaurants extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +39,7 @@ export default class Restaurants extends Component {
 
   render() {
     return (
-      <div>
+      <div class="scrollable">
         <Filter action={event => this.setState({ filterOption: event })} />
         <Consumer>
           {(context) =>
