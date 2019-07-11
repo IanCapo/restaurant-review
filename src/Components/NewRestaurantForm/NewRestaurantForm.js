@@ -1,11 +1,33 @@
 import React, { Component } from 'react'
+import './NewRestaurantForm.css'
+import axios from 'axios'
 
 export default class NewRestaurantForm extends Component {
   constructor() {
     super()
     this.state = {
-      restaurant_name: ''
+      restaurant_name: '',
+      restaurant: {
+        name: '',
+        geometry: {
+          location: {
+            lat: '',
+            lng: ''
+          }
+        },
+        vicinity: '',
+      }
     }
+  }
+
+  componentDidMount() {
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.props.lat},${this.props.lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
+      .then((response) => {
+        this.setState({ restaurant: { vicinity: response.data.results[0].formatted_address } })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   /* handling the submit of a new review  */
@@ -20,25 +42,20 @@ export default class NewRestaurantForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // let author_name = this.state.author_name
-    // let text = this.state.text
-    // let rating = this.state.value
-    // let newReview = { 'author_name': author_name, 'text': text, 'rating': rating }
-    // this.setState({
-    //   reviews: [...this.state.reviews, newReview]
-    // });
-    console.log(this.state.restaurant_name)
+    let restaurant_name = this.state.restaurant_name
+    this.setState({
+      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } } }
+    });
+    this.props.action(this.state.restaurant)
   }
+
   render() {
-
-
     return (
       <div>
-        <form>
-          <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
-            <input type='text' name="restaurant_name" placeholder="Reestaurant name" value={this.state.restaurant_name} onChange={this.handleChange}></input>
-            <button>Add restaurant</button>
-          </form>
+        <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
+          <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
+          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
+          <button>Add restaurant</button>
         </form>
       </div>
     )

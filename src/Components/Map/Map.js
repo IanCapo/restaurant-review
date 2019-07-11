@@ -14,7 +14,8 @@ class SimpleMap extends Component {
         lng: 30.33
       },
       zoom: 11,
-      newRestaurantForm: 'no'
+      newPin: 'no',
+      showForm: 'no'
     }
   }
 
@@ -25,21 +26,29 @@ class SimpleMap extends Component {
   }
 
   onMapClick = (target) => {
-    let lat = target.y
-    let lng = target.x
-    this.setState({ newRestaurantForm: 'yes', newRestaurant: { location: { lat: lat, lng: lng } } })
+    let lat = target.lat
+    let lng = target.lng
+    this.setState({ newPin: 'yes', showForm: 'yes', newRestaurant: { location: { lat: lat, lng: lng } } })
   }
 
-  renderForm = () => {
+  addNewPin = () => {
     let lat = this.state.newRestaurant.location.lat
     let lng = this.state.newRestaurant.location.lng
 
-    console.log(lat, lng)
-    return <NewRestaurantForm></NewRestaurantForm>
+    return <LocationPin lat={lat} lng={lng} color="orange" hover="yes" />
+  }
+
+  childHandler(dataFromChild) {
+    if (dataFromChild) {
+      console.log(dataFromChild)
+      // this.setState({ showForm: 'no' })
+    }
   }
 
 
+
   render() {
+
     return (
       <div style={{ height: '100vh', width: '80%' }}>
         <Consumer>
@@ -62,12 +71,19 @@ class SimpleMap extends Component {
 
                 {this.renderRestaurantPins(context.restaurants)}
 
-                {this.state.newRestaurantForm === 'yes' ? this.renderForm() : null}
+                {this.state.newPin === 'yes' ? this.addNewPin() : null}
 
-              </GoogleMapReact>)
+
+
+              </GoogleMapReact>
+
+            )
 
           }}
+
         </Consumer>
+        {this.state.showForm === 'yes' ? <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={this.childHandler} /> : null}
+        }
       </div>
     );
   }
