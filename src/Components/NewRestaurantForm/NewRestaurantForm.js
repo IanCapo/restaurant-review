@@ -43,19 +43,27 @@ export default class NewRestaurantForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let restaurant_name = this.state.restaurant_name
+    let value = this.state.value
     this.setState({
-      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } } }
+      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } }, rating: value }
     });
 
   }
 
   render() {
-    console.log('props', this.props)
+    console.log('state', this.state)
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
           <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
+          <select type="number" name="value" onChange={event => this.handleChange(event)}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
           <button type="submit">Add restaurant</button>
         </form>
         {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}

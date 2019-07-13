@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ReviewCard from '../../Components/ReviewCard'
+import './RestaurantDetails.css'
 
 export default class RestaurantDetails extends Component {
   state = {
@@ -23,7 +24,7 @@ export default class RestaurantDetails extends Component {
   replaceResponseURL = (geometry) => {
     let lat = geometry.location.lat
     let lng = geometry.location.lng
-    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=300x300&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
     return newURL
   }
 
@@ -96,21 +97,26 @@ export default class RestaurantDetails extends Component {
 
     return (
       <div>
-        <img src={this.state.imageURL} />
-        <p>{checkIfOpen()}</p>
+        <img className="streetViewImage" src={this.state.imageURL} alt="streetview" />
+        <p className={checkIfOpen()} >{checkIfOpen()}</p>
         <p>{vicinity}</p>
         <h3>Reviews:</h3>
         {this.state.reviews ? this.renderReviews(this.state.reviews) : null}
         <form id="reviewForm" onSubmit={event => this.handleSubmit(event)}>
-          <input type='text' name="author_name" value={this.state.author_name} onChange={this.handleChange}></input>
-          <input type='text' name="text" value={this.state.text} onChange={this.handleChange}></input>
-          <select name="value" value={this.state.value} onChange={this.handleChange}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <h4>Add a review</h4>
+          <input type='text' name="author_name" placeholder="Your name" value={this.state.author_name} onChange={this.handleChange}></input>
+          <input type='text' name="text" placeholder="Your review" value={this.state.text} onChange={this.handleChange}></input>
+          <div className="select-field">
+            <label htmlFor="value">How do you rate this establishment</label>
+            <select name="value" value={this.state.value} onChange={this.handleChange}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+
+          </div>
           <button>Add review</button>
         </form>
       </div>

@@ -1,0 +1,73 @@
+.streetViewImage {
+  width: 80%;
+  height: 200px;
+  object-fit: cover;
+}
+
+p {
+  padding: 20px 20px 0 20px;
+  position: relative;
+}
+
+.open::before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:rgb(47, 255, 47);
+}
+
+.closed::before {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  content: ' ' ;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background:red;
+}
+
+#reviewForm {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+#reviewForm input {
+  border-radius: 3px;
+  padding: 3px;
+  box-shadow: none;
+  border: 1px solid grey;
+  margin: 10px 0;
+}
+
+#reviewForm .select-field {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+} 
+
+#reviewForm .select-field  select {
+  width: 50px;
+}
+
+#reviewForm .select-field label {
+  margin: 0;
+  margin-right: 10px;
+}
+
+#reviewForm button {
+  margin-top: 10px;
+  border-radius: 3px;
+  color: black;
+  background: rgb(158, 240, 26);
+  outline: none;
+}
+
+#reviewForm button:hover {
+  background: black;
+  color: rgb(158, 240, 26);
+}
