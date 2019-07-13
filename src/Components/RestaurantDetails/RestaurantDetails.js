@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ReviewCard from '../../Components/ReviewCard'
 import './RestaurantDetails.css'
+import Button from '../Button'
 
 export default class RestaurantDetails extends Component {
   state = {
@@ -117,7 +118,7 @@ export default class RestaurantDetails extends Component {
             </select>
 
           </div>
-          <button>Add review</button>
+          <Button type="submit" text="Add review" />
         </form>
       </div>
     )

@@ -58,16 +58,3 @@ p {
   margin: 0;
   margin-right: 10px;
 }
-
-#reviewForm button {
-  margin-top: 10px;
-  border-radius: 3px;
-  color: black;
-  background: rgb(158, 240, 26);
-  outline: none;
-}
-
-#reviewForm button:hover {
-  background: black;
-  color: rgb(158, 240, 26);
-}

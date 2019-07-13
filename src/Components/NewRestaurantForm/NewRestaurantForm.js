@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './NewRestaurantForm.css'
 import axios from 'axios'
+import Button from '../Button'
 
 export default class NewRestaurantForm extends Component {
   constructor() {
@@ -55,8 +56,10 @@ export default class NewRestaurantForm extends Component {
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
+          <h5>Add a new restaurant</h5>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
           <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
+          <label name="value"> How would you rate this establishment?</label>
           <select type="number" name="value" onChange={event => this.handleChange(event)}>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -64,7 +67,7 @@ export default class NewRestaurantForm extends Component {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button type="submit">Add restaurant</button>
+          <Button type="submit" text="Add restaurant"></Button>
         </form>
         {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}
         {this.state.restaurant.name ? this.props.getData(this.state.restaurant) : null}

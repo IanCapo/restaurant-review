@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Filter from '../Filter'
 import RestaurantItem from '../RestaurantItem'
-import AddButton from '../AddButton'
+import Button from '../Button'
 import { Consumer } from '../../AppProvider'
 import './Restaurants.css'
 
@@ -47,7 +47,7 @@ export default class Restaurants extends Component {
           {(context) =>
             this.filterRestaurants(context.restaurants)}
         </Consumer>
-        <AddButton />
+        <Button text="Add new Restaurant" />
       </div>
     )
   }
