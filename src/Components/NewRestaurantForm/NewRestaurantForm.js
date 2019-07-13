@@ -58,7 +58,7 @@ export default class NewRestaurantForm extends Component {
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
           <h5>Add a new restaurant</h5>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
-          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
+          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Street, Zip code, Country'} onChange={event => this.handleChange(event)} />
           <label name="value"> How would you rate this establishment?</label>
           <select type="number" name="value" onChange={event => this.handleChange(event)}>
             <option value="1">1</option>
