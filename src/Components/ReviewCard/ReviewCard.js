@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './ReviewCard.css'
 
 export default class ReviewCard extends Component {
 
@@ -8,8 +9,8 @@ export default class ReviewCard extends Component {
 
     return (
       <div>
-        <h4>{name} - {rating} Stars</h4>
-        <p>{text}</p>
+        <p className="name">{name} - {rating} Stars</p>
+        <p className="review">{text}</p>
       </div>
     )
   }

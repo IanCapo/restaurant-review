@@ -7,6 +7,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import RestaurantDetails from '../RestaurantDetails'
+import './RestaurantItem.css'
 
 
 const styles = theme => ({
@@ -15,7 +16,7 @@ const styles = theme => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
+    flexBasis: '60%',
     flexShrink: 0,
   },
   secondaryHeading: {
@@ -44,12 +45,12 @@ class RestaurantItem extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>{this.props.name}</Typography>
+            <Typography className={`${classes.heading} heading-style`}>{this.props.name}</Typography>
             <Typography className={classes.secondaryHeading}>{Math.round(this.props.averageRating)}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
 
-            <Typography>
+            <Typography className="restaurant-details-container">
               <RestaurantDetails data={this.state.data} />
             </Typography>
 

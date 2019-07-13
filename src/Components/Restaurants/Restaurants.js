@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Filter from '../Filter'
 import RestaurantItem from '../RestaurantItem'
-import AddButton from '../AddButton'
+import Button from '../Button'
 import { Consumer } from '../../AppProvider'
+import './Restaurants.css'
+
 
 export default class Restaurants extends Component {
   constructor(props) {
@@ -30,7 +32,8 @@ export default class Restaurants extends Component {
           name={restaurant.name}
           lat={restaurant.geometry.location.lat}
           lng={restaurant.geometry.location.lng}
-          averageRating={restaurant.rating} />
+          averageRating={restaurant.rating}
+        />
       )
     })
     )
@@ -38,13 +41,13 @@ export default class Restaurants extends Component {
 
   render() {
     return (
-      <div>
+      <div className="scrollable">
         <Filter action={event => this.setState({ filterOption: event })} />
         <Consumer>
           {(context) =>
             this.filterRestaurants(context.restaurants)}
         </Consumer>
-        <AddButton />
+        <Button text="Add new Restaurant" />
       </div>
     )
   }

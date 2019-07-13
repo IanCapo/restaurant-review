@@ -13,15 +13,16 @@ class SimpleMap extends Component {
         lat: 59.95,
         lng: 30.33
       },
-      zoom: 11,
+      zoom: 15,
       newPin: 'no',
       showForm: 'no'
     }
   }
 
   renderRestaurantPins = (restaurants) => {
+    // console.log('restaurants', restaurants)
     return restaurants.map((restaurant) => (
-      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" />
+      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" key={restaurant.id} />
     ))
   }
 
@@ -38,19 +39,16 @@ class SimpleMap extends Component {
     return <LocationPin lat={lat} lng={lng} color="orange" hover="yes" />
   }
 
-  childHandler(dataFromChild) {
+  childHandler = (dataFromChild) => {
     if (dataFromChild) {
-      console.log(dataFromChild)
-      // this.setState({ showForm: 'no' })
+      this.setState({ showForm: 'no' })
     }
   }
-
-
 
   render() {
 
     return (
-      <div style={{ height: '100vh', width: '80%' }}>
+      <div style={{ height: '100vh', width: '70%' }}>
         <Consumer>
           {(context) => {
             return (
@@ -67,23 +65,26 @@ class SimpleMap extends Component {
                   lng={context.center.lng}
                   text="Your location"
                   color="red"
+                  key="myLocation"
                 />
 
                 {this.renderRestaurantPins(context.restaurants)}
 
                 {this.state.newPin === 'yes' ? this.addNewPin() : null}
 
-
-
               </GoogleMapReact>
-
             )
-
           }}
 
         </Consumer>
-        {this.state.showForm === 'yes' ? <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={this.childHandler} /> : null}
-        }
+        <Consumer>
+          {(context) => {
+            if (this.state.showForm === 'yes') {
+              return <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={this.childHandler} getData={context.addNewRestaurant} />
+            }
+          }}
+        </Consumer>
+
       </div>
     );
   }
