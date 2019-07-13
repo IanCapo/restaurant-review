@@ -11,7 +11,7 @@ export default class AppProvider extends Component {
       lng: 173.2840
     },
     addNewRestaurant: (dataFromChild) => {
-      console.log('provider, dataFromChild', dataFromChild)
+      console.log('provider, dataFromChild', dataFromChild.restaurant)
       this.setState({ restaurants: { ...this.state.restaurants, dataFromChild } })
     }
   }
@@ -19,7 +19,7 @@ export default class AppProvider extends Component {
   getRestaurants = (url) => {
     axios.get(url)
       .then((response) => {
-        console.log(response.data.results)
+        // console.log(response.data.results)
         this.setState({ restaurants: response.data.results })
       })
       .catch(function (error) {
@@ -50,7 +50,7 @@ export default class AppProvider extends Component {
 
 
   render() {
-    console.log(this.state.restaurants)
+    // console.log(this.state.restaurants)
     return <AppContext.Provider value={this.state}>
       {this.props.children}
     </AppContext.Provider>

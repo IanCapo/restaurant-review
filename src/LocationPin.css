@@ -1,0 +1,39 @@
+.locationPin {
+  width: 25px;
+  height: 25px;
+  background: red;
+  border-radius: 50px;
+  transform: translateY(10%);
+  border: 1px solid white;
+}
+
+.green {
+  background: green;
+}
+
+.red {
+  background: red;
+}
+
+.orange {
+  background: orange;
+}
+
+.hidden {
+  display: none;
+}
+
+.locationPin:hover > .hidden {
+  display: block;
+}
+
+.nameTag {
+  width: 120px;
+  height: auto;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid black;
+  padding: 4px;
+  transform: translateX(15%);
+  z-index: 100;
+}

@@ -20,9 +20,9 @@ class SimpleMap extends Component {
   }
 
   renderRestaurantPins = (restaurants) => {
-    console.log('restaurants', restaurants)
+    // console.log('restaurants', restaurants)
     return restaurants.map((restaurant) => (
-      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" />
+      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" key={restaurant.id} />
     ))
   }
 
@@ -41,19 +41,14 @@ class SimpleMap extends Component {
 
   childHandler = (dataFromChild) => {
     if (dataFromChild) {
-      console.log(dataFromChild)
       this.setState({ showForm: 'no' })
     }
   }
 
-  // passDataToProvider = (restaurant) => {
-  //   this.props.action(restaurant)
-  // }
-
   render() {
 
     return (
-      <div style={{ height: '100vh', width: '80%' }}>
+      <div style={{ height: '100vh', width: '70%' }}>
         <Consumer>
           {(context) => {
             return (
@@ -70,6 +65,7 @@ class SimpleMap extends Component {
                   lng={context.center.lng}
                   text="Your location"
                   color="red"
+                  key="myLocation"
                 />
 
                 {this.renderRestaurantPins(context.restaurants)}

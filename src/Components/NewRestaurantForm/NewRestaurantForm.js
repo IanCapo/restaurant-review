@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './NewRestaurantForm.css'
 import axios from 'axios'
+import Button from '../Button'
 
 export default class NewRestaurantForm extends Component {
   constructor() {
@@ -43,20 +44,30 @@ export default class NewRestaurantForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let restaurant_name = this.state.restaurant_name
+    let value = this.state.value
     this.setState({
-      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } } }
+      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } }, rating: value }
     });
 
   }
 
   render() {
-    console.log('props', this.props)
+    console.log('state', this.state)
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
+          <h5>Add a new restaurant</h5>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
-          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Address'} onChange={event => this.handleChange(event)} />
-          <button type="submit">Add restaurant</button>
+          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Street, Zip code, Country'} onChange={event => this.handleChange(event)} />
+          <label name="value"> How would you rate this establishment?</label>
+          <select type="number" name="value" onChange={event => this.handleChange(event)}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <Button type="submit" text="Add restaurant"></Button>
         </form>
         {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}
         {this.state.restaurant.name ? this.props.getData(this.state.restaurant) : null}

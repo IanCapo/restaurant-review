@@ -1,11 +1,10 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Consumer } from '../../AppProvider';
+import './Filter.css'
 
 export default class Filter extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false
@@ -22,17 +21,13 @@ export default class Filter extends React.Component {
     this.props.action(value)
   }
 
-
-
   render() {
     return (
-
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
           Filter
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header onClick={e => this.filterOptions(1)}>1+</DropdownItem>
           <DropdownItem onClick={e => this.filterOptions(2)}>2+</DropdownItem>
           <DropdownItem onClick={e => this.filterOptions(3)}>3+</DropdownItem>
           <DropdownItem onClick={e => this.filterOptions(4)}>4+</DropdownItem>
