@@ -37,6 +37,18 @@ class RestaurantItem extends React.Component {
     });
   };
 
+  renderStars = (rating) => {
+    console.log(rating)
+    let starsArray = []
+    let i
+    for (i = 0; i < rating; i++) {
+      starsArray.push('☆')
+    }
+    return starsArray.map(star => {
+      return star
+    })
+  }
+
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
@@ -46,7 +58,7 @@ class RestaurantItem extends React.Component {
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={`${classes.heading} heading-style`}>{this.props.name}</Typography>
-            <Typography className={classes.secondaryHeading}>{this.props.averageRating}</Typography>
+            <Typography className={classes.secondaryHeading}>{this.renderStars(this.props.averageRating)}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
 

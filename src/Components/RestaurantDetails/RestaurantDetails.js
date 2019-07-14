@@ -110,11 +110,11 @@ export default class RestaurantDetails extends Component {
           <div className="select-field">
             <label htmlFor="value">How do you rate this establishment</label>
             <select name="value" value={this.state.value} onChange={this.handleChange}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              <option value="1">☆</option>
+              <option value="2">☆☆</option>
+              <option value="3">☆☆☆</option>
+              <option value="4">☆☆☆☆</option>
+              <option value="5">☆☆☆☆☆</option>
             </select>
 
           </div>

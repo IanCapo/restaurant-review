@@ -94,11 +94,11 @@ export default class NewRestaurantForm extends Component {
           }
           <label name="value"> How would you rate this establishment?</label>
           <select type="number" name="value" onChange={event => this.handleChange(event)}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option value="1">☆</option>
+            <option value="2">☆☆</option>
+            <option value="3">☆☆☆</option>
+            <option value="4">☆☆☆☆</option>
+            <option value="5">☆☆☆☆☆</option>
           </select>
           <Button type="submit" text="Add restaurant"></Button>
         </form>

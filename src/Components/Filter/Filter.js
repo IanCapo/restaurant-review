@@ -25,13 +25,13 @@ export default class Filter extends React.Component {
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
-          Filter
+          Filter by rating
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem onClick={e => this.filterOptions(2)}>2+</DropdownItem>
-          <DropdownItem onClick={e => this.filterOptions(3)}>3+</DropdownItem>
-          <DropdownItem onClick={e => this.filterOptions(4)}>4+</DropdownItem>
-          <DropdownItem onClick={e => this.filterOptions(5)}>5+</DropdownItem>
+          <DropdownItem onClick={e => this.filterOptions(2)}>2+ ☆</DropdownItem>
+          <DropdownItem onClick={e => this.filterOptions(3)}>3+ ☆</DropdownItem>
+          <DropdownItem onClick={e => this.filterOptions(4)}>4+ ☆</DropdownItem>
+          <DropdownItem onClick={e => this.filterOptions(5)}>5+ ☆</DropdownItem>
           <DropdownItem divider />
           <DropdownItem onClick={e => this.filterOptions('all')}>All</DropdownItem>
         </DropdownMenu>
