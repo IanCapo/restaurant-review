@@ -4,6 +4,7 @@ import RestaurantItem from '../RestaurantItem'
 import Button from '../Button'
 import { Consumer } from '../../AppProvider'
 import './Restaurants.css'
+import NewRestaurantForm from '../NewRestaurantForm'
 
 
 export default class Restaurants extends Component {
@@ -14,11 +15,14 @@ export default class Restaurants extends Component {
     };
   }
 
+
+  renderForm = () => {
+    console.log('test')
+  }
+
   filterRestaurants = (restaurants) => {
     let filterOption = this.state.filterOption
     let filterFunction
-
-
     if (filterOption === 'all') {
       filterFunction = restaurant => true
     } else {
@@ -47,7 +51,7 @@ export default class Restaurants extends Component {
           {(context) =>
             this.filterRestaurants(context.restaurants)}
         </Consumer>
-        <Button text="Add new Restaurant" />
+        <Button type="button" text="Add new Restaurant" />
       </div>
     )
   }

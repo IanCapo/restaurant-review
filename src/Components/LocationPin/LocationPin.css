@@ -1,23 +1,14 @@
-.locationPin {
-  width: 25px;
-  height: 25px;
-  background: red;
-  border-radius: 50px;
-  transform: translateY(10%);
-  border: 1px solid white;
-}
-
-.green {
-  background: green;
+.blue {
+  background: #003980;
 }
 
 .red {
-  background: red;
+  background: #de2a3b;
 }
 
 .orange {
   background: orange;
-}
+} 
 
 .hidden {
   display: none;
@@ -28,12 +19,37 @@
 }
 
 .nameTag {
+  position: absolute;
   width: 120px;
   height: auto;
   background: white;
   border-radius: 3px;
   border: 1px solid black;
   padding: 4px;
-  transform: translateX(15%);
+  transform: rotate(45deg) translate(25px, 8px);
   z-index: 100;
+}
+
+.locationPin {
+  width: 25px;
+  height: 25px;
+  border-radius: 50% 50% 50% 0;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -20px 0 0 -5px;
+  border: 1px solid white;
+
+}
+.locationPin:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin: 8px 0 0 8px;
+  background: #e6e6e6;
+  position: absolute;
+  bottom: 7px;  
+  left: -1px;
+  border-radius: 50%;
 }

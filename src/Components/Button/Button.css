@@ -1,13 +1,14 @@
-button[type=submit], button {
+button[type=submit], button[type=button] {
   margin-top: 10px;
   border-radius: 3px;
   color: black;
   background: rgb(158, 240, 26);
   outline: none;
   padding: 0 8px;
+  font-weight: 600;
  }
 
  [type=submit], button:hover {
-    background: black;
-    color: rgb(158, 240, 26);
+    background: #4ae816d4;
+    color: #212529;
   }
