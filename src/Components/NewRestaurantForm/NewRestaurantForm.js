@@ -9,6 +9,7 @@ export default class NewRestaurantForm extends Component {
     this.state = {
       restaurant_name: '',
       address: '',
+      value: '1',
       restaurant: {
         geometry: { location: { lat: '', lng: '' }, viewport: '' },
         icon: '',
