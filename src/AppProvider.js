@@ -12,9 +12,8 @@ export default class AppProvider extends Component {
     },
     addNewRestaurant: (dataFromChild) => {
       const { restaurant } = dataFromChild
-      // console.log('restaurant', restaurant)
       this.setState((state) => ({
-        restaurants: [{ ...state.restaurants, restaurant }]
+        restaurants: [...state.restaurants, restaurant]
       }))
     }
   }
@@ -53,7 +52,6 @@ export default class AppProvider extends Component {
 
 
   render() {
-    console.log(typeof this.state.restaurants)
     return <AppContext.Provider value={this.state}>
       {this.props.children}
     </AppContext.Provider>
