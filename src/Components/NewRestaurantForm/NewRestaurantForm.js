@@ -28,7 +28,7 @@ export default class NewRestaurantForm extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.props.lat},${this.props.lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
       .then((response) => {
         this.setState((state) => ({

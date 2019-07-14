@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import LocationPin from '../LocationPin'
+import LocationPin from '../LocationPin/LocationPin'
 import { Consumer } from '../../AppProvider'
 import NewRestaurantForm from '../NewRestaurantForm'
 
@@ -21,7 +21,7 @@ class SimpleMap extends Component {
 
   renderRestaurantPins = (restaurants) => {
     return restaurants.map((restaurant) => (
-      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" key={restaurant.id} />
+      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="green" key={restaurant.id} hover="yes" />
     ))
   }
 
@@ -35,7 +35,7 @@ class SimpleMap extends Component {
     let lat = this.state.newRestaurant.location.lat
     let lng = this.state.newRestaurant.location.lng
 
-    return <LocationPin lat={lat} lng={lng} color="orange" hover="yes" />
+    return <LocationPin lat={lat} lng={lng} color="orange" hover="no" />
   }
 
   childHandler = (dataFromChild) => {

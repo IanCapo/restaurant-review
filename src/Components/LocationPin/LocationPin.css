@@ -23,7 +23,7 @@
   display: none;
 }
 
-.locationPin:hover > .hidden {
+.locationPin[hover='yes']:hover > .hidden {
   display: block;
 }
 
