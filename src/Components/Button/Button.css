@@ -1,4 +1,4 @@
-button[type=submit], button[type=button] {
+button[type=submit], button[type=text] {
   margin-top: 10px;
   border-radius: 3px;
   color: black;
@@ -9,6 +9,6 @@ button[type=submit], button[type=button] {
  }
 
  [type=submit], button:hover {
-    background: #4ae816d4;
-    color: #212529;
+  background: #4ae816d4;
+  color: #212529;
   }

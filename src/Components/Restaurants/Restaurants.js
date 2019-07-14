@@ -51,7 +51,7 @@ export default class Restaurants extends Component {
           {(context) =>
             this.filterRestaurants(context.restaurants)}
         </Consumer>
-        <Button type="button" text="Add new Restaurant" />
+        <Button type="text" text="Add new Restaurant" />
       </div>
     )
   }
