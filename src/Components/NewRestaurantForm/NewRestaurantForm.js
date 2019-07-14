@@ -8,15 +8,22 @@ export default class NewRestaurantForm extends Component {
     super()
     this.state = {
       restaurant_name: '',
+      address: '',
+      value: '1',
       restaurant: {
-        geometry: {
-          location: {
-            lat: '',
-            lng: ''
-          }
-        },
+        geometry: { location: { lat: '', lng: '' }, viewport: '' },
+        icon: '',
+        id: '',
         name: '',
-        vicinity: '',
+        photos: [''],
+        place_id: '',
+        plus_code: { compound_code: '', global_code: '' },
+        rating: '',
+        reference: '',
+        scope: '',
+        types: [''],
+        user_ratings_total: '',
+        vicinity: ''
       }
     }
   }
@@ -24,12 +31,16 @@ export default class NewRestaurantForm extends Component {
   componentDidMount() {
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.props.lat},${this.props.lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
       .then((response) => {
-        this.setState({ restaurant: { vicinity: response.data.results[0].formatted_address } })
+        this.setState((state) => ({
+          restaurant: { ...state.restaurant, vicinity: response.data.results[0].formatted_address }
+        }))
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
+
 
   /* handling the submit of a new review  */
   handleChange = (event) => {
@@ -43,16 +54,13 @@ export default class NewRestaurantForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let restaurant_name = this.state.restaurant_name
-    let value = this.state.value
-    this.setState({
-      restaurant: { ...this.state.restaurant, name: restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng } }, rating: value }
-    });
-
+    this.setState((state) => ({
+      restaurant: { ...state.restaurant, name: state.restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng }, viewport: '' }, rating: state.value }
+    }), () => this.props.getData(this.state));
   }
 
   render() {
-    console.log('state', this.state)
+
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
@@ -70,7 +78,6 @@ export default class NewRestaurantForm extends Component {
           <Button type="submit" text="Add restaurant"></Button>
         </form>
         {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}
-        {this.state.restaurant.name ? this.props.getData(this.state.restaurant) : null}
       </div>
     )
   }

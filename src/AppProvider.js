@@ -11,8 +11,10 @@ export default class AppProvider extends Component {
       lng: 173.2840
     },
     addNewRestaurant: (dataFromChild) => {
-      console.log('provider, dataFromChild', dataFromChild.restaurant)
-      this.setState({ restaurants: { ...this.state.restaurants, dataFromChild } })
+      const { restaurant } = dataFromChild
+      this.setState((state) => ({
+        restaurants: [...state.restaurants, restaurant]
+      }))
     }
   }
 
@@ -50,7 +52,6 @@ export default class AppProvider extends Component {
 
 
   render() {
-    // console.log(this.state.restaurants)
     return <AppContext.Provider value={this.state}>
       {this.props.children}
     </AppContext.Provider>
