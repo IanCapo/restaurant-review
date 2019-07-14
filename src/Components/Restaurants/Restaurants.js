@@ -16,11 +16,8 @@ export default class Restaurants extends Component {
     };
   }
 
-  childHandler = (dataFromChild) => {
-    if (dataFromChild) {
-      console.log('action', dataFromChild)
-      this.setState({ showForm: 'no' });
-    }
+  childHandler = () => {
+    this.setState({ showForm: 'no' });
   }
 
   filterRestaurants = (restaurants) => {

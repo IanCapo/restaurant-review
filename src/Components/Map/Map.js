@@ -34,15 +34,11 @@ class SimpleMap extends Component {
   addNewPin = () => {
     let lat = this.state.newRestaurant.location.lat
     let lng = this.state.newRestaurant.location.lng
-
     return <LocationPin lat={lat} lng={lng} color="orange" hover="no" />
   }
 
-  childHandler = (dataFromChild) => {
-    if (dataFromChild) {
-      console.log('action', dataFromChild)
-      this.setState({ showForm: 'no', newPin: 'no' });
-    }
+  childHandler = () => {
+    this.setState({ showForm: 'no', newPin: 'no' });
   }
 
   render() {
@@ -80,7 +76,7 @@ class SimpleMap extends Component {
         <Consumer>
           {(context) => {
             if (this.state.showForm === 'yes') {
-              return <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={this.childHandler} getData={context.addNewRestaurant} />
+              return <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={event => this.childHandler()} getData={context.addNewRestaurant} />
             }
           }}
         </Consumer>
