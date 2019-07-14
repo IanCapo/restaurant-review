@@ -46,7 +46,7 @@ class RestaurantItem extends React.Component {
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={`${classes.heading} heading-style`}>{this.props.name}</Typography>
-            <Typography className={classes.secondaryHeading}>{Math.round(this.props.averageRating)}</Typography>
+            <Typography className={classes.secondaryHeading}>{this.props.averageRating}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
 

@@ -21,7 +21,7 @@ export default class AppProvider extends Component {
   getRestaurants = (url) => {
     axios.get(url)
       .then((response) => {
-        // console.log(response.data.results)
+        console.log(response.data.results)
         this.setState({ restaurants: response.data.results })
       })
       .catch(function (error) {

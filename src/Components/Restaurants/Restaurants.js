@@ -11,13 +11,16 @@ export default class Restaurants extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterOption: 'all'
+      filterOption: 'all',
+      showForm: 'no'
     };
   }
 
-
-  renderForm = () => {
-    console.log('test')
+  childHandler = (dataFromChild) => {
+    if (dataFromChild) {
+      console.log('action', dataFromChild)
+      this.setState({ showForm: 'no' });
+    }
   }
 
   filterRestaurants = (restaurants) => {
@@ -36,11 +39,10 @@ export default class Restaurants extends Component {
           name={restaurant.name}
           lat={restaurant.geometry.location.lat}
           lng={restaurant.geometry.location.lng}
-          averageRating={restaurant.rating}
+          averageRating={restaurant.rating ? Math.round(restaurant.rating) : '/'}
         />
       )
-    })
-    )
+    }))
   }
 
   render() {
@@ -49,9 +51,16 @@ export default class Restaurants extends Component {
         <Filter action={event => this.setState({ filterOption: event })} />
         <Consumer>
           {(context) =>
-            this.filterRestaurants(context.restaurants)}
+            this.filterRestaurants(context.restaurants)
+          }
         </Consumer>
-        <Button type="text" text="Add new Restaurant" />
+        <Button type="text" text="Add new Restaurant" onClick={event => this.setState({ showForm: 'yes' })} />
+        {this.state.showForm === 'yes' ?
+          <Consumer>
+            {(context) =>
+              <NewRestaurantForm getData={context.addNewRestaurant} action={event => this.childHandler()} />
+            }
+          </Consumer> : null}
       </div>
     )
   }

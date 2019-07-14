@@ -8,7 +8,6 @@ export default class NewRestaurantForm extends Component {
     super()
     this.state = {
       restaurant_name: '',
-      address: '',
       value: '1',
       restaurant: {
         geometry: { location: { lat: '', lng: '' }, viewport: '' },
@@ -40,7 +39,18 @@ export default class NewRestaurantForm extends Component {
       });
   }
 
-
+  findLocation = () => {
+    let { street, number, city } = this.state
+    axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${street}+${number}+${city}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
+      .then((response) => {
+        this.setState((state) => ({
+          restaurant: { ...state.restaurant, geometry: response.data.results[0].geometry }
+        }))
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   /* handling the submit of a new review  */
   handleChange = (event) => {
@@ -54,19 +64,33 @@ export default class NewRestaurantForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState((state) => ({
-      restaurant: { ...state.restaurant, name: state.restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng }, viewport: '' }, rating: state.value }
-    }), () => this.props.getData(this.state));
+    if (this.props.lat && this.props.lng) {
+      this.setState((state) => ({
+        restaurant: { ...state.restaurant, name: state.restaurant_name, geometry: { location: { lat: this.props.lat, lng: this.props.lng }, viewport: '' }, rating: state.value }
+      }), () => this.props.getData(this.state));
+    } else {
+      this.findLocation()
+      this.setState((state) => ({
+        restaurant: { ...state.restaurant, name: state.restaurant_name, rating: state.value, vicinity: `${this.state.street} ${this.state.number}, ${this.state.city}` }
+      }), () => this.props.getData(this.state));
+    }
+
   }
 
   render() {
-
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
           <h5>Add a new restaurant</h5>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
-          <input type="text" name="address" placeholder={this.state.restaurant.vicinity ? this.state.restaurant.vicinity : 'Street, Zip code, Country'} onChange={event => this.handleChange(event)} />
+          {this.state.restaurant.vicinity ?
+            <input type="text" disabled name="address" placeholder={this.state.restaurant.vicinity} />
+            : <div>
+              <input type="text" name="street" placeholder="Street" onChange={event => this.handleChange(event)} />
+              <input type="text" name="number" placeholder="Number" onChange={event => this.handleChange(event)} />
+              <input type="text" name="city" placeholder="City/Town" onChange={event => this.handleChange(event)} />
+            </div>
+          }
           <label name="value"> How would you rate this establishment?</label>
           <select type="number" name="value" onChange={event => this.handleChange(event)}>
             <option value="1">1</option>
@@ -77,7 +101,7 @@ export default class NewRestaurantForm extends Component {
           </select>
           <Button type="submit" text="Add restaurant"></Button>
         </form>
-        {this.state.restaurant.name ? this.props.action(this.state.restaurant) : null}
+        {this.state.restaurant.name ? this.props.action() : null}
       </div>
     )
   }
