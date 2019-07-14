@@ -12,3 +12,30 @@ button[type=submit], button[type=text] {
   background: #4ae816d4;
   color: #212529;
   }
+
+button.closeButton {
+  position: absolute;
+  right: 6px;
+  top: -4px;
+  width: 21px;
+  height: 21px;
+  opacity: 0.3;
+  background: white;
+  outline: none;
+}
+
+.closeButton:before, .closeButton:after {
+  position: absolute;
+  left: 9px;
+  top: 4px;
+  content: ' ';
+  height: 12px;
+  width: 2px;
+  background-color: #333;
+}
+.closeButton:before {
+  transform: rotate(45deg);
+}
+.closeButton:after {
+  transform: rotate(-45deg);
+}
