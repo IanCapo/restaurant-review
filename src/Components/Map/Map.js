@@ -21,7 +21,6 @@ class SimpleMap extends Component {
   }
 
   renderRestaurantPins = (restaurants) => {
-    console.log(restaurants)
     return restaurants.map((restaurant) => (
       <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="blue" key={restaurant.id} hover="yes" />
     ))

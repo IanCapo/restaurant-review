@@ -40,7 +40,7 @@ export default class RestaurantDetails extends Component {
         if (image.data.status === "OK") {
           this.setState({ imageURL: this.replaceResponseURL(this.props.data.geometry) })
         } else {
-          this.setState({ imageURL: 'no street view' })
+          this.setState({ imageURL: 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6' })
         }
         if (reviews.data.status === "OK") {
           this.setState({ reviews: reviews.data.result.reviews })
@@ -107,7 +107,7 @@ export default class RestaurantDetails extends Component {
         <p className={checkIfOpen()} >{checkIfOpen()}</p>
         <p>{vicinity}</p>
         <h3>Reviews:</h3>
-        {this.state.reviews ? this.renderReviews(this.state.reviews) : <p>ne reviews yet - be the first</p>}
+        {this.state.reviews ? this.renderReviews(this.state.reviews) : <p>no reviews yet - be the first</p>}
         <form id="reviewForm" onSubmit={event => this.handleSubmit(event)}>
           <h4>Add a review</h4>
           <input type='text' name="author_name" placeholder="Your name" value={this.state.author_name} onChange={this.handleChange}></input>
