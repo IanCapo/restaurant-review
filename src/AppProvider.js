@@ -29,7 +29,6 @@ export default class AppProvider extends Component {
       });
   }
 
-
   componentWillMount() {
     var getPosition = function (options) {
       return new Promise(function (resolve, reject) {
@@ -40,16 +39,13 @@ export default class AppProvider extends Component {
     getPosition()
       .then((position) => {
         this.setState({ center: { lat: position.coords.latitude, lng: position.coords.longitude } });
-        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=1500&type=restaurant&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=1200&type=restaurant&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
         this.getRestaurants(url)
       })
       .catch((err) => {
         console.error(err.message);
       });
   }
-
-
-
 
   render() {
     return <AppContext.Provider value={this.state}>

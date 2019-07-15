@@ -11,7 +11,7 @@ export default class RestaurantDetails extends Component {
     reviews: [],
     author_name: '',
     text: '',
-    value: ''
+    value: '',
   }
 
   /* fetch image data and reviews */
@@ -73,15 +73,21 @@ export default class RestaurantDetails extends Component {
     let text = this.state.text
     let rating = this.state.value
     let newReview = { 'author_name': author_name, 'text': text, 'rating': rating }
-    this.setState({
-      reviews: [...this.state.reviews, newReview]
-    });
+    if (this.state.reviews) {
+      this.setState({
+        reviews: [...this.state.reviews, newReview], author_name: '', text: '', value: ''
+      });
+    } else {
+      this.setState({
+        reviews: [newReview], author_name: '', text: '', value: ''
+      });
+    }
   }
 
 
   render() {
+    console.log(this.state.reviews)
     let { vicinity, opening_hours } = this.props.data
-
     function checkIfOpen() {
       let open
       if (opening_hours) {
@@ -102,7 +108,7 @@ export default class RestaurantDetails extends Component {
         <p className={checkIfOpen()} >{checkIfOpen()}</p>
         <p>{vicinity}</p>
         <h3>Reviews:</h3>
-        {this.state.reviews ? this.renderReviews(this.state.reviews) : null}
+        {this.state.reviews ? this.renderReviews(this.state.reviews) : <p>ne reviews yet - be the first</p>}
         <form id="reviewForm" onSubmit={event => this.handleSubmit(event)}>
           <h4>Add a review</h4>
           <input type='text' name="author_name" placeholder="Your name" value={this.state.author_name} onChange={this.handleChange}></input>
