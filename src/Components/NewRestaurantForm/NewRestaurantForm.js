@@ -44,8 +44,8 @@ export default class NewRestaurantForm extends Component {
     axios.get(` https://maps.googleapis.com/maps/api/geocode/json?address=${street}+${number}+${city}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`)
       .then((response) => {
         this.setState((state) => ({
-          restaurant: { ...state.restaurant, geometry: response.data.results[0].geometry }
-        }))
+          restaurant: { ...state.restaurant, name: state.restaurant_name, rating: state.value, vicinity: `${this.state.street} ${this.state.number}, ${this.state.city}`, geometry: response.data.results[0].geometry }
+        }), () => this.props.getData(this.state))
       })
       .catch(function (error) {
         console.log(error);
@@ -70,9 +70,6 @@ export default class NewRestaurantForm extends Component {
       }), () => this.props.getData(this.state));
     } else {
       this.findLocation()
-      this.setState((state) => ({
-        restaurant: { ...state.restaurant, name: state.restaurant_name, rating: state.value, vicinity: `${this.state.street} ${this.state.number}, ${this.state.city}` }
-      }), () => this.props.getData(this.state));
     }
 
   }

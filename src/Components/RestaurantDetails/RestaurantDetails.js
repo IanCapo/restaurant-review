@@ -86,7 +86,6 @@ export default class RestaurantDetails extends Component {
 
 
   render() {
-    console.log(this.state.reviews)
     let { vicinity, opening_hours } = this.props.data
     function checkIfOpen() {
       let open

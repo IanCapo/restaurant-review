@@ -38,7 +38,6 @@ class RestaurantItem extends React.Component {
   };
 
   renderStars = (rating) => {
-    console.log(rating)
     let starsArray = []
     let i
     for (i = 0; i < rating; i++) {
