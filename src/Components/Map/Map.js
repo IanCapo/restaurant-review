@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import LocationPin from '../LocationPin/LocationPin'
 import { Consumer } from '../../AppProvider'
 import NewRestaurantForm from '../NewRestaurantForm'
+import Button from '../Button'
 
 
 class SimpleMap extends Component {
@@ -44,7 +45,7 @@ class SimpleMap extends Component {
   render() {
 
     return (
-      <div style={{ height: '100vh', width: '70%' }}>
+      <div style={{ height: '100vh', width: '70%', position: 'relative' }}>
         <Consumer>
           {(context) => {
             return (
@@ -63,24 +64,20 @@ class SimpleMap extends Component {
                   color="red"
                   key="myLocation"
                 />
-
                 {this.renderRestaurantPins(context.restaurants)}
-
                 {this.state.newPin === 'yes' ? this.addNewPin() : null}
-
               </GoogleMapReact>
             )
           }}
-
         </Consumer>
         <Consumer>
           {(context) => {
             if (this.state.showForm === 'yes') {
-              return <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={event => this.childHandler()} getData={context.addNewRestaurant} />
+              return <NewRestaurantForm lat={this.state.newRestaurant.location.lat} lng={this.state.newRestaurant.location.lng} action={event => this.childHandler()} getData={context.addNewRestaurant} closeForm={event => this.childHandler()} />
             }
           }}
         </Consumer>
-
+        <Button disabled="disabled" text="Add a restaurant by clicking on the map" />
       </div>
     );
   }

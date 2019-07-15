@@ -81,7 +81,7 @@ export default class NewRestaurantForm extends Component {
     return (
       <div>
         <form id="restaurantForm" onSubmit={event => this.handleSubmit(event)}>
-          <Button type="text" className="closeButton" />
+          <Button type="text" className="closeButton" onClick={this.props.closeForm} />
           <h5>Add a new restaurant</h5>
           <input type='text' name="restaurant_name" placeholder="Restaurant name" value={this.state.restaurant_name} onChange={event => this.handleChange(event)}></input>
           {this.state.restaurant.vicinity ?

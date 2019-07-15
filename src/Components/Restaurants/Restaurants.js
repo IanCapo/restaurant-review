@@ -55,7 +55,7 @@ export default class Restaurants extends Component {
         {this.state.showForm === 'yes' ?
           <Consumer>
             {(context) =>
-              <NewRestaurantForm getData={context.addNewRestaurant} action={event => this.childHandler()} />
+              <NewRestaurantForm getData={context.addNewRestaurant} action={event => this.childHandler()} closeForm={event => this.childHandler()} />
             }
           </Consumer> : null}
       </div>

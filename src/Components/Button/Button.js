@@ -3,10 +3,10 @@ import './Button.css'
 
 export default class Button extends Component {
   render() {
-    const { text, type, className } = this.props
+    const { text, type, className, disabled } = this.props
     return (
       <div>
-        <button className={className} type={type} onClick={this.props.onClick}>{text}</button>
+        <button className={className} type={type} disabled={disabled} onClick={this.props.onClick}>{text}</button>
       </div>
     )
   }

@@ -39,3 +39,16 @@ button.closeButton {
 .closeButton:after {
   transform: rotate(-45deg);
 }
+
+button[disabled] {
+  font-size: 10px;
+  background: white;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  position: relative;
+  top: -50px;
+  left: 10px;
+  color: black;
+  box-shadow: 1px 1px 5px grey;
+}
