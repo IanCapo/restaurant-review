@@ -71,7 +71,6 @@ export default class NewRestaurantForm extends Component {
     } else {
       this.findLocation()
     }
-
   }
 
   render() {
