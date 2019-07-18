@@ -16,10 +16,6 @@ export default class Restaurants extends Component {
     };
   }
 
-  childHandler = () => {
-    this.setState({ showForm: 'no' });
-  }
-
   filterRestaurants = (restaurants) => {
     let filterOption = this.state.filterOption
     let filterFunction
@@ -40,6 +36,10 @@ export default class Restaurants extends Component {
         />
       )
     }))
+  }
+
+  childHandler = () => {
+    this.setState({ showForm: 'no' });
   }
 
   render() {

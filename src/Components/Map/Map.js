@@ -16,7 +16,8 @@ class SimpleMap extends Component {
       },
       zoom: 15,
       newPin: 'no',
-      showForm: 'no'
+      showForm: 'no',
+      newRestaurant: {}
     }
   }
 

@@ -14,6 +14,23 @@ export default class RestaurantDetails extends Component {
     value: '',
   }
 
+
+  componentDidMount = () => {
+    axios.all([this.fetchImage(this.props.data.geometry), this.fetchPlacesDetails()])
+      .then(axios.spread((image, reviews) => {
+        if (image.data.status === "OK") {
+          this.setState({ imageURL: this.replaceResponseURL(this.props.data.geometry) })
+        } else {
+          this.setState({ imageURL: 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6' })
+        }
+        if (reviews.data.status === "OK") {
+          this.setState({ reviews: reviews.data.result.reviews })
+        } else {
+          console.log('no reviews')
+        }
+      }))
+  }
+
   /* fetch image data and reviews */
   fetchImage = (geometry) => {
     let lat = geometry.location.lat
@@ -32,22 +49,6 @@ export default class RestaurantDetails extends Component {
   fetchPlacesDetails = () => {
     let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${this.props.data.place_id}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
     return axios.get(url)
-  }
-
-  componentDidMount = () => {
-    axios.all([this.fetchImage(this.props.data.geometry), this.fetchPlacesDetails()])
-      .then(axios.spread((image, reviews) => {
-        if (image.data.status === "OK") {
-          this.setState({ imageURL: this.replaceResponseURL(this.props.data.geometry) })
-        } else {
-          this.setState({ imageURL: 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6' })
-        }
-        if (reviews.data.status === "OK") {
-          this.setState({ reviews: reviews.data.result.reviews })
-        } else {
-          console.log('no reviews')
-        }
-      }))
   }
 
   /* render reviews */
@@ -83,7 +84,6 @@ export default class RestaurantDetails extends Component {
       });
     }
   }
-
 
   render() {
     let { vicinity, opening_hours } = this.props.data
@@ -121,7 +121,6 @@ export default class RestaurantDetails extends Component {
               <option value="4">☆☆☆☆</option>
               <option value="5">☆☆☆☆☆</option>
             </select>
-
           </div>
           <Button type="submit" text="Add review" />
         </form>

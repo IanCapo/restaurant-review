@@ -18,16 +18,6 @@ export default class AppProvider extends Component {
     }
   }
 
-  getRestaurants = (url) => {
-    axios.get(url)
-      .then((response) => {
-        this.setState({ restaurants: response.data.results })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   componentWillMount() {
     var getPosition = function (options) {
       return new Promise(function (resolve, reject) {
@@ -43,6 +33,16 @@ export default class AppProvider extends Component {
       })
       .catch((err) => {
         console.error(err.message);
+      });
+  }
+
+  getRestaurants = (url) => {
+    axios.get(url)
+      .then((response) => {
+        this.setState({ restaurants: response.data.results })
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
