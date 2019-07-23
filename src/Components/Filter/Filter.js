@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import './Filter.css'
 
 export default class Filter extends React.Component {
   constructor(props) {

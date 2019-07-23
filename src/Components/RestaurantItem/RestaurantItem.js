@@ -7,7 +7,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import RestaurantDetails from '../RestaurantDetails'
-import './RestaurantItem.css'
 
 
 const styles = theme => ({
