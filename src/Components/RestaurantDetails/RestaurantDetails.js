@@ -3,6 +3,7 @@ import axios from 'axios'
 import ReviewCard from '../../Components/ReviewCard'
 import './RestaurantDetails.css'
 import Button from '../Button'
+import { uid } from 'react-uid';
 
 export default class RestaurantDetails extends Component {
   state = {
@@ -54,7 +55,7 @@ export default class RestaurantDetails extends Component {
   /* render reviews */
   renderReviews = (reviews) => {
     return reviews.map((review) => (
-      <ReviewCard name={review.author_name} rating={review.rating} text={review.text} />
+      <ReviewCard name={review.author_name} rating={review.rating} text={review.text} key={uid(review)} />
     ))
   }
 

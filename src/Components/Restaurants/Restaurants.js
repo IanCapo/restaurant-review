@@ -5,6 +5,7 @@ import Button from '../Button'
 import { Consumer } from '../../AppProvider'
 import './Restaurants.css'
 import NewRestaurantForm from '../NewRestaurantForm'
+import { uid } from 'react-uid';
 
 
 export default class Restaurants extends Component {
@@ -33,6 +34,7 @@ export default class Restaurants extends Component {
           lat={restaurant.geometry.location.lat}
           lng={restaurant.geometry.location.lng}
           averageRating={restaurant.rating ? Math.round(restaurant.rating) : '/'}
+          key={uid(restaurant)}
         />
       )
     }))

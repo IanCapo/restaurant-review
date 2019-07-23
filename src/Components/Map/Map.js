@@ -4,6 +4,7 @@ import LocationPin from '../LocationPin/LocationPin'
 import { Consumer } from '../../AppProvider'
 import NewRestaurantForm from '../NewRestaurantForm'
 import Button from '../Button'
+import { uid } from 'react-uid';
 
 
 class SimpleMap extends Component {
@@ -23,7 +24,7 @@ class SimpleMap extends Component {
 
   renderRestaurantPins = (restaurants) => {
     return restaurants.map((restaurant) => (
-      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="blue" key={restaurant.id} hover="yes" />
+      <LocationPin lat={restaurant.geometry.location.lat} lng={restaurant.geometry.location.lng} text={restaurant.name} color="blue" key={uid(restaurant)} hover="yes" />
     ))
   }
 
