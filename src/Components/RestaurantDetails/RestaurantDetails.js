@@ -4,6 +4,7 @@ import ReviewCard from '../../Components/ReviewCard'
 import './RestaurantDetails.css'
 import Button from '../Button'
 import { uid } from 'react-uid';
+import api from '../../api'
 
 export default class RestaurantDetails extends Component {
   state = {
@@ -36,19 +37,19 @@ export default class RestaurantDetails extends Component {
   fetchImage = (geometry) => {
     let lat = geometry.location.lat
     let lng = geometry.location.lng
-    let url = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let url = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${lat},${lng}&key=${api}`
     return axios.get(url)
   }
 
   replaceResponseURL = (geometry) => {
     let lat = geometry.location.lat
     let lng = geometry.location.lng
-    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${lng}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let newURL = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${lng}&key=${api}`
     return newURL
   }
 
   fetchPlacesDetails = () => {
-    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${this.props.data.place_id}&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+    let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${this.props.data.place_id}&key=${api}`
     return axios.get(url)
   }
 

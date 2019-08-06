@@ -5,6 +5,7 @@ import { Consumer } from '../../AppProvider'
 import NewRestaurantForm from '../NewRestaurantForm'
 import Button from '../Button'
 import { uid } from 'react-uid';
+import api from '../../api'
 
 
 class SimpleMap extends Component {
@@ -51,7 +52,7 @@ class SimpleMap extends Component {
           {(context) => {
             return (
               <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y' }}
+                bootstrapURLKeys={{ key: `${api}` }}
                 center={context.center}
                 defaultZoom={this.state.zoom}
                 onChildMouseEnter={this.onChildMouseEnter}

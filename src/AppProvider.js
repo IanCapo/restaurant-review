@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import api from './api'
 const AppContext = React.createContext()
 
 
@@ -28,7 +29,7 @@ export default class AppProvider extends Component {
     getPosition()
       .then((position) => {
         this.setState({ center: { lat: position.coords.latitude, lng: position.coords.longitude } });
-        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=1200&type=restaurant&key=AIzaSyAdcepCPJjEMQ4uqP1rA3ajDhT68owO__Y`
+        let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.coords.latitude},${position.coords.longitude}&radius=1200&type=restaurant&key=${api}`
         this.getRestaurants(url)
       })
       .catch((err) => {
