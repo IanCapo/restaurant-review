@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## INSERT YOUR API KEY in api.js file to enable api calls
+
 ## Available Scripts
 
 In the project directory, you can run:
